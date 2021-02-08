@@ -3,31 +3,31 @@ D0003E_Lab2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000002  00800100  00000204  00000298  2**0
+  0 .data         00000002  00800100  0000024e  000002e2  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         00000204  00000000  00000000  00000094  2**1
+  1 .text         0000024e  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000223  00800102  00800102  0000029a  2**0
+  2 .bss          00000223  00800102  00800102  000002e4  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000029a  2**0
+  3 .comment      00000030  00000000  00000000  000002e4  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002cc  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000314  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000088  00000000  00000000  0000030c  2**0
+  5 .debug_aranges 00000090  00000000  00000000  00000354  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000010cc  00000000  00000000  00000394  2**0
+  6 .debug_info   000010fb  00000000  00000000  000003e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000b66  00000000  00000000  00001460  2**0
+  7 .debug_abbrev 00000b73  00000000  00000000  000014df  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000005a7  00000000  00000000  00001fc6  2**0
+  8 .debug_line   000005db  00000000  00000000  00002052  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001c8  00000000  00000000  00002570  2**2
+  9 .debug_frame  00000220  00000000  00000000  00002630  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000537  00000000  00000000  00002738  2**0
+ 10 .debug_str    0000054d  00000000  00000000  00002850  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000008d8  00000000  00000000  00002c6f  2**0
+ 11 .debug_loc    000009a3  00000000  00000000  00002d9d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000110  00000000  00000000  00003547  2**0
+ 12 .debug_ranges 00000118  00000000  00000000  00003740  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -36,11 +36,11 @@ Disassembly of section .text:
    0:	0c 94 2e 00 	jmp	0x5c	; 0x5c <__ctors_end>
    4:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
    8:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
-   c:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
+   c:	0c 94 9b 00 	jmp	0x136	; 0x136 <__vector_3>
   10:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
   14:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
   18:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
-  1c:	0c 94 9b 00 	jmp	0x136	; 0x136 <__vector_7>
+  1c:	0c 94 c0 00 	jmp	0x180	; 0x180 <__vector_7>
   20:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
   24:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
   28:	0c 94 4b 00 	jmp	0x96	; 0x96 <__bad_interrupt>
@@ -69,7 +69,7 @@ Disassembly of section .text:
   68:	11 e0       	ldi	r17, 0x01	; 1
   6a:	a0 e0       	ldi	r26, 0x00	; 0
   6c:	b1 e0       	ldi	r27, 0x01	; 1
-  6e:	e4 e0       	ldi	r30, 0x04	; 4
+  6e:	ee e4       	ldi	r30, 0x4E	; 78
   70:	f2 e0       	ldi	r31, 0x02	; 2
   72:	02 c0       	rjmp	.+4      	; 0x78 <__do_copy_data+0x10>
   74:	05 90       	lpm	r0, Z+
@@ -92,7 +92,7 @@ Disassembly of section .text:
   8a:	b2 07       	cpc	r27, r18
   8c:	e1 f7       	brne	.-8      	; 0x86 <.do_clear_bss_loop>
   8e:	0e 94 4d 00 	call	0x9a	; 0x9a <main>
-  92:	0c 94 00 01 	jmp	0x200	; 0x200 <_exit>
+  92:	0c 94 25 01 	jmp	0x24a	; 0x24a <_exit>
 
 00000096 <__bad_interrupt>:
   96:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -125,7 +125,7 @@ static thread dequeue(thread *queue) {
   ae:	80 91 00 01 	lds	r24, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
   b2:	90 91 01 01 	lds	r25, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
   b6:	06 96       	adiw	r24, 0x06	; 6
-  b8:	0e 94 bf 00 	call	0x17e	; 0x17e <setjmp>
+  b8:	0e 94 e4 00 	call	0x1c8	; 0x1c8 <setjmp>
   bc:	89 2b       	or	r24, r25
   be:	29 f0       	breq	.+10     	; 0xca <dispatch+0x2a>
   c0:	0f 90       	pop	r0
@@ -140,7 +140,7 @@ static thread dequeue(thread *queue) {
   d6:	61 e0       	ldi	r22, 0x01	; 1
   d8:	70 e0       	ldi	r23, 0x00	; 0
   da:	06 96       	adiw	r24, 0x06	; 6
-  dc:	0e 94 df 00 	call	0x1be	; 0x1be <longjmp>
+  dc:	0e 94 04 01 	call	0x208	; 0x208 <longjmp>
 
 000000e0 <yield>:
     enqueue(newp, &readyQ);
@@ -220,13 +220,13 @@ static thread dequeue(thread *queue) {
  132:	30 e0       	ldi	r19, 0x00	; 0
  134:	f2 cf       	rjmp	.-28     	; 0x11a <yield+0x3a>
 
-00000136 <__vector_7>:
-	//if (stick_down==0) {
-		//yield();
-	//}
-//}
+00000136 <__vector_3>:
+thread readyQ  = NULL;
+thread current = &initp;
 
-ISR(TIMER1_COMPA_vect) {
+int initialized = 0;
+
+ISR(PCINT1_vect) {
  136:	1f 92       	push	r1
  138:	0f 92       	push	r0
  13a:	0f b6       	in	r0, 0x3f	; 63
@@ -244,99 +244,144 @@ ISR(TIMER1_COMPA_vect) {
  152:	bf 93       	push	r27
  154:	ef 93       	push	r30
  156:	ff 93       	push	r31
-	yield();
- 158:	0e 94 70 00 	call	0xe0	; 0xe0 <yield>
-	
+	uint16_t stick_down = PINB >> 7;
+		
+	if (stick_down==0) {
+ 158:	1f 9b       	sbis	0x03, 7	; 3
+		yield();
+ 15a:	0e 94 70 00 	call	0xe0	; 0xe0 <yield>
+	}
 }
- 15c:	ff 91       	pop	r31
- 15e:	ef 91       	pop	r30
- 160:	bf 91       	pop	r27
- 162:	af 91       	pop	r26
- 164:	9f 91       	pop	r25
- 166:	8f 91       	pop	r24
- 168:	7f 91       	pop	r23
- 16a:	6f 91       	pop	r22
- 16c:	5f 91       	pop	r21
- 16e:	4f 91       	pop	r20
- 170:	3f 91       	pop	r19
- 172:	2f 91       	pop	r18
- 174:	0f 90       	pop	r0
- 176:	0f be       	out	0x3f, r0	; 63
- 178:	0f 90       	pop	r0
- 17a:	1f 90       	pop	r1
- 17c:	18 95       	reti
+ 15e:	ff 91       	pop	r31
+ 160:	ef 91       	pop	r30
+ 162:	bf 91       	pop	r27
+ 164:	af 91       	pop	r26
+ 166:	9f 91       	pop	r25
+ 168:	8f 91       	pop	r24
+ 16a:	7f 91       	pop	r23
+ 16c:	6f 91       	pop	r22
+ 16e:	5f 91       	pop	r21
+ 170:	4f 91       	pop	r20
+ 172:	3f 91       	pop	r19
+ 174:	2f 91       	pop	r18
+ 176:	0f 90       	pop	r0
+ 178:	0f be       	out	0x3f, r0	; 63
+ 17a:	0f 90       	pop	r0
+ 17c:	1f 90       	pop	r1
+ 17e:	18 95       	reti
 
-0000017e <setjmp>:
- 17e:	dc 01       	movw	r26, r24
- 180:	2d 92       	st	X+, r2
- 182:	3d 92       	st	X+, r3
- 184:	4d 92       	st	X+, r4
- 186:	5d 92       	st	X+, r5
- 188:	6d 92       	st	X+, r6
- 18a:	7d 92       	st	X+, r7
- 18c:	8d 92       	st	X+, r8
- 18e:	9d 92       	st	X+, r9
- 190:	ad 92       	st	X+, r10
- 192:	bd 92       	st	X+, r11
- 194:	cd 92       	st	X+, r12
- 196:	dd 92       	st	X+, r13
- 198:	ed 92       	st	X+, r14
- 19a:	fd 92       	st	X+, r15
- 19c:	0d 93       	st	X+, r16
- 19e:	1d 93       	st	X+, r17
- 1a0:	cd 93       	st	X+, r28
- 1a2:	dd 93       	st	X+, r29
- 1a4:	ff 91       	pop	r31
- 1a6:	ef 91       	pop	r30
- 1a8:	8d b7       	in	r24, 0x3d	; 61
- 1aa:	8d 93       	st	X+, r24
- 1ac:	8e b7       	in	r24, 0x3e	; 62
- 1ae:	8d 93       	st	X+, r24
- 1b0:	8f b7       	in	r24, 0x3f	; 63
- 1b2:	8d 93       	st	X+, r24
- 1b4:	ed 93       	st	X+, r30
- 1b6:	fd 93       	st	X+, r31
- 1b8:	88 27       	eor	r24, r24
- 1ba:	99 27       	eor	r25, r25
- 1bc:	09 94       	ijmp
+00000180 <__vector_7>:
 
-000001be <longjmp>:
- 1be:	dc 01       	movw	r26, r24
- 1c0:	cb 01       	movw	r24, r22
- 1c2:	81 30       	cpi	r24, 0x01	; 1
- 1c4:	91 05       	cpc	r25, r1
- 1c6:	81 1d       	adc	r24, r1
- 1c8:	2d 90       	ld	r2, X+
- 1ca:	3d 90       	ld	r3, X+
- 1cc:	4d 90       	ld	r4, X+
- 1ce:	5d 90       	ld	r5, X+
- 1d0:	6d 90       	ld	r6, X+
- 1d2:	7d 90       	ld	r7, X+
- 1d4:	8d 90       	ld	r8, X+
- 1d6:	9d 90       	ld	r9, X+
- 1d8:	ad 90       	ld	r10, X+
- 1da:	bd 90       	ld	r11, X+
- 1dc:	cd 90       	ld	r12, X+
- 1de:	dd 90       	ld	r13, X+
- 1e0:	ed 90       	ld	r14, X+
- 1e2:	fd 90       	ld	r15, X+
- 1e4:	0d 91       	ld	r16, X+
- 1e6:	1d 91       	ld	r17, X+
- 1e8:	cd 91       	ld	r28, X+
- 1ea:	dd 91       	ld	r29, X+
- 1ec:	ed 91       	ld	r30, X+
- 1ee:	fd 91       	ld	r31, X+
- 1f0:	0d 90       	ld	r0, X+
- 1f2:	f8 94       	cli
- 1f4:	fe bf       	out	0x3e, r31	; 62
- 1f6:	0f be       	out	0x3f, r0	; 63
- 1f8:	ed bf       	out	0x3d, r30	; 61
- 1fa:	ed 91       	ld	r30, X+
- 1fc:	fd 91       	ld	r31, X+
- 1fe:	09 94       	ijmp
+ISR(TIMER1_COMPA_vect) {
+ 180:	1f 92       	push	r1
+ 182:	0f 92       	push	r0
+ 184:	0f b6       	in	r0, 0x3f	; 63
+ 186:	0f 92       	push	r0
+ 188:	11 24       	eor	r1, r1
+ 18a:	2f 93       	push	r18
+ 18c:	3f 93       	push	r19
+ 18e:	4f 93       	push	r20
+ 190:	5f 93       	push	r21
+ 192:	6f 93       	push	r22
+ 194:	7f 93       	push	r23
+ 196:	8f 93       	push	r24
+ 198:	9f 93       	push	r25
+ 19a:	af 93       	push	r26
+ 19c:	bf 93       	push	r27
+ 19e:	ef 93       	push	r30
+ 1a0:	ff 93       	push	r31
+	yield();
+ 1a2:	0e 94 70 00 	call	0xe0	; 0xe0 <yield>
+}
+ 1a6:	ff 91       	pop	r31
+ 1a8:	ef 91       	pop	r30
+ 1aa:	bf 91       	pop	r27
+ 1ac:	af 91       	pop	r26
+ 1ae:	9f 91       	pop	r25
+ 1b0:	8f 91       	pop	r24
+ 1b2:	7f 91       	pop	r23
+ 1b4:	6f 91       	pop	r22
+ 1b6:	5f 91       	pop	r21
+ 1b8:	4f 91       	pop	r20
+ 1ba:	3f 91       	pop	r19
+ 1bc:	2f 91       	pop	r18
+ 1be:	0f 90       	pop	r0
+ 1c0:	0f be       	out	0x3f, r0	; 63
+ 1c2:	0f 90       	pop	r0
+ 1c4:	1f 90       	pop	r1
+ 1c6:	18 95       	reti
 
-00000200 <_exit>:
- 200:	f8 94       	cli
+000001c8 <setjmp>:
+ 1c8:	dc 01       	movw	r26, r24
+ 1ca:	2d 92       	st	X+, r2
+ 1cc:	3d 92       	st	X+, r3
+ 1ce:	4d 92       	st	X+, r4
+ 1d0:	5d 92       	st	X+, r5
+ 1d2:	6d 92       	st	X+, r6
+ 1d4:	7d 92       	st	X+, r7
+ 1d6:	8d 92       	st	X+, r8
+ 1d8:	9d 92       	st	X+, r9
+ 1da:	ad 92       	st	X+, r10
+ 1dc:	bd 92       	st	X+, r11
+ 1de:	cd 92       	st	X+, r12
+ 1e0:	dd 92       	st	X+, r13
+ 1e2:	ed 92       	st	X+, r14
+ 1e4:	fd 92       	st	X+, r15
+ 1e6:	0d 93       	st	X+, r16
+ 1e8:	1d 93       	st	X+, r17
+ 1ea:	cd 93       	st	X+, r28
+ 1ec:	dd 93       	st	X+, r29
+ 1ee:	ff 91       	pop	r31
+ 1f0:	ef 91       	pop	r30
+ 1f2:	8d b7       	in	r24, 0x3d	; 61
+ 1f4:	8d 93       	st	X+, r24
+ 1f6:	8e b7       	in	r24, 0x3e	; 62
+ 1f8:	8d 93       	st	X+, r24
+ 1fa:	8f b7       	in	r24, 0x3f	; 63
+ 1fc:	8d 93       	st	X+, r24
+ 1fe:	ed 93       	st	X+, r30
+ 200:	fd 93       	st	X+, r31
+ 202:	88 27       	eor	r24, r24
+ 204:	99 27       	eor	r25, r25
+ 206:	09 94       	ijmp
 
-00000202 <__stop_program>:
- 202:	ff cf       	rjmp	.-2      	; 0x202 <__stop_program>
+00000208 <longjmp>:
+ 208:	dc 01       	movw	r26, r24
+ 20a:	cb 01       	movw	r24, r22
+ 20c:	81 30       	cpi	r24, 0x01	; 1
+ 20e:	91 05       	cpc	r25, r1
+ 210:	81 1d       	adc	r24, r1
+ 212:	2d 90       	ld	r2, X+
+ 214:	3d 90       	ld	r3, X+
+ 216:	4d 90       	ld	r4, X+
+ 218:	5d 90       	ld	r5, X+
+ 21a:	6d 90       	ld	r6, X+
+ 21c:	7d 90       	ld	r7, X+
+ 21e:	8d 90       	ld	r8, X+
+ 220:	9d 90       	ld	r9, X+
+ 222:	ad 90       	ld	r10, X+
+ 224:	bd 90       	ld	r11, X+
+ 226:	cd 90       	ld	r12, X+
+ 228:	dd 90       	ld	r13, X+
+ 22a:	ed 90       	ld	r14, X+
+ 22c:	fd 90       	ld	r15, X+
+ 22e:	0d 91       	ld	r16, X+
+ 230:	1d 91       	ld	r17, X+
+ 232:	cd 91       	ld	r28, X+
+ 234:	dd 91       	ld	r29, X+
+ 236:	ed 91       	ld	r30, X+
+ 238:	fd 91       	ld	r31, X+
+ 23a:	0d 90       	ld	r0, X+
+ 23c:	f8 94       	cli
+ 23e:	fe bf       	out	0x3e, r31	; 62
+ 240:	0f be       	out	0x3f, r0	; 63
+ 242:	ed bf       	out	0x3d, r30	; 61
+ 244:	ed 91       	ld	r30, X+
+ 246:	fd 91       	ld	r31, X+
+ 248:	09 94       	ijmp
+
+0000024a <_exit>:
+ 24a:	f8 94       	cli
+
+0000024c <__stop_program>:
+ 24c:	ff cf       	rjmp	.-2      	; 0x24c <__stop_program>

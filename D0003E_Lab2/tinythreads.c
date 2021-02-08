@@ -29,17 +29,16 @@ thread current = &initp;
 
 int initialized = 0;
 
-//ISR(PCINT1_vect) {
-	//uint16_t stick_down = PINB >> 7;
-		//
-	//if (stick_down==0) {
-		//yield();
-	//}
-//}
+ISR(PCINT1_vect) {
+	uint16_t stick_down = PINB >> 7;
+		
+	if (stick_down==0) {
+		yield();
+	}
+}
 
 ISR(TIMER1_COMPA_vect) {
 	yield();
-	
 }
 
 static void initialize(void) {
@@ -51,9 +50,9 @@ static void initialize(void) {
 	initLCD();
 
 	// Joystick initialization
-	//PORTB = PORTB | (1<<7);
-	//EIMSK = (1<<7);
-	//PCMSK1 = (1<<7);
+	PORTB = PORTB | (1<<7);
+	EIMSK = (1<<7);
+	PCMSK1 = (1<<7);
 	
 	// Enable OC1A pin
 	PORTB = PORTB | (1<<5);
